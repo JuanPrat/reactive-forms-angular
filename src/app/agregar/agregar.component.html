@@ -1,0 +1,37 @@
+<div class="container">
+    <form [formGroup]="formulario">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre">
+            <div *ngIf="formulario.controls['nombre'].invalid" class="alert alert-danger" role="alert">
+                El nombre es requerido
+                <span *ngIf="formulario.controls['nombre'].errors.required"></span>
+            </div>
+            <label>Correo</label>
+            <input type="text" class="form-control" formControlName="correo">
+            <div *ngIf="formulario.controls['correo'].invalid">
+                <div class="alert alert-danger" role="alert" *ngIf="formulario.controls['correo'].errors.required">
+                    El correo es requerido
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="formulario.controls['correo'].errors.email">
+                    No parece un correo valido
+                </div>
+            </div>
+            <label>Contraseña</label>
+            <input type="password" class="form-control" formControlName="contrasenna">
+            <div *ngIf="formulario.controls['contrasenna'].invalid">
+                <div class="alert alert-danger" role="alert" *ngIf="formulario.controls['contrasenna'].errors.required">
+                    Contraseña es requerida
+                </div>
+                <div class="alert alert-danger" role="alert"
+                    *ngIf="formulario.controls['contrasenna'].errors.minlength">
+                    La contraseña debe tener almenos 8 caracteres
+                </div>
+            </div>
+            <button *ngIf="esNuevo" [disabled]=" !formulario.valid" class="btn btn-primary"
+                (click)="agregar()">Agregar</button>
+            <button *ngIf="!esNuevo" [disabled]=" !formulario.valid" class="btn btn-danger"
+                (click)="editar()">Editar</button>
+        </div>
+    </form>
+</div>
